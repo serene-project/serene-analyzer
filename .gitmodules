@@ -1,0 +1,3 @@
+[submodule "src/webpy"]
+	path = src/webpy
+	url = https://github.com/webpy/webpy.git
