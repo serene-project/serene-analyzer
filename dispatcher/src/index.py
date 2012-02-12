@@ -17,7 +17,7 @@ from dispatcher import subscriptions
 urls = (
     '/', 'index',
     '/version', 'version', 
-    '/input', 'input', 
+    '/input', 'data', 
     '/inputs', 'inputs', 
     '/subscription', 'subscription', 
     '/subscriptions', 'subscriptions'     

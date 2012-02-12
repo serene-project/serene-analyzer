@@ -15,13 +15,24 @@ class index:
     
 class version:        
     def GET(self):
-        return json.dumps({'name' : '', 
+        return json.dumps({'name' : 'dispatcher', 
                            'version' : '0.1'}) 
 
-class data: 
-    def POST(self):
-        i = web.input()
-        return json.dumps(i.message)
+class data:     
+    def POST(self):    
+        from mongodb_connector import mongodb
+        
+        # select the data collection 
+        collection = mongodb.data
+        
+        inputs = web.input()
+        message = inputs.message
+        
+        #todo: validate message 
+        document = json.loads(message)
+        
+        _id = collection.insert(document)
+        return _id;  
     
     def GET(self):
         return 'NOK'
