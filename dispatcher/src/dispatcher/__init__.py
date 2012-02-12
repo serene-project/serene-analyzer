@@ -1,3 +1,10 @@
+'''
+
+
+@version: 0.1
+@author: Olivier Morel
+@contact: omorel@serene-project.net
+'''
 import json
 import web
 
@@ -8,7 +15,8 @@ class index:
     
 class version:        
     def GET(self):
-        return json.dumps({'version' : '0.1'}) 
+        return json.dumps({'name' : '', 
+                           'version' : '0.1'}) 
 
 class data: 
     def POST(self):
