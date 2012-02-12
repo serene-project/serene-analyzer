@@ -39,9 +39,33 @@ class data:
         
 class subscription: 
     def POST(self):
-        return 'NOK'
+        from mongodb_connector import mongodb
+        import time
+        
+        #select the plugins collection 
+        collection = mongodb.plugins
+        
+        inputs = web.input()
+        plugin = { 
+            'type' : inputs.type,
+            'hostname' : inputs.hostname,
+            'enabled' : True, 
+            'enabled_since' : time.time()
+        }
+        
+        #todo: validate inputs
+        elem = collection.find_one({'type': plugin['type'], 'hostname' : plugin['hostname']})
+        
+        if elem == None: 
+            collection.insert(plugin)
+        elif elem['enabled'] == False:
+            elem['enabled'] = True
+            elem['enabled_since'] = time.time()
+            _id = collection.insert(elem)
+         
+        return {'status' : 'OK', 'message' : 'Subscription enabled'}
     
-    def GET(self, uuid):
+    def GET(self):
         return 'NOK'
 
 class subscriptions: 
